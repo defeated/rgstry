@@ -64,5 +64,11 @@ module Rgstry
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # add bower components directory to asset load path
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
+    # For faster asset precompiles, only partially load the rails application
+    config.assets.initialize_on_precompile = false
   end
 end
