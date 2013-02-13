@@ -1,11 +1,11 @@
-<table>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Rails</th>
-      <th>Revision</th>
-      <th>Committed At</th>
+      <th class="rails">Rails</th>
+      <th class="revision">Revision</th>
+      <th class="committed-at">Committed At</th>
     </tr>
   </thead>
   <tbody>
@@ -13,10 +13,10 @@
     <% @programs.each do |program| %>
       <tr>
         <td><%= program.name %></td>
-        <td><%= program.description %></td>
+        <td class="description"><%= program.description %></td>
         <td><%= program.rails %></td>
         <td><%= program.revision.slice(0, 7) %></td>
-        <td><%= time_ago_in_words program.committed_at %></td>
+        <td><%= time_ago_in_words program.committed_at %> ago</td>
       </tr>
     <% end %>
 
