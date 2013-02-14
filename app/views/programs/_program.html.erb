@@ -1,0 +1,7 @@
+<tr>
+  <td><%= program.name %></td>
+  <td class="description"><%= program.description %></td>
+  <td><%= program.rails %></td>
+  <td><%= program.revision.slice(0, 7) %></td>
+  <td><%= time_ago_in_words program.committed_at %> ago</td>
+</tr>
