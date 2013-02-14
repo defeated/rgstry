@@ -1,9 +1,14 @@
 require 'octokit'
 require 'bundler'
 require 'base64'
+require 'gems'
 
 class HomeController < ApplicationController
   def index
+
+    @versions = Gems.versions('rails').
+      reject { |version| version['prerelease'] }.take(4).
+      map { |version| version["number"] }.sort.reverse
 
     @programs = []
 

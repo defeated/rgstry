@@ -4,6 +4,7 @@ source :rubygems
 gem 'rails', '3.2.12'
 gem 'sqlite3'
 gem 'octokit',  require: false
+gem 'gems',     require: false
 
 # Gems used only for assets and not required
 # in production environments by default.
