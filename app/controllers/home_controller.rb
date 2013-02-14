@@ -38,7 +38,7 @@ class HomeController < ApplicationController
           program = Program.new({
             name:         repo.full_name,
             description:  repo.description,
-            rails:        rails.requirement,
+            rails:        rails.requirement.requirements.first.last.version,
             revision:     master.commit.sha,
             committed_at: master.commit.commit.committer.date
           })
