@@ -14,7 +14,11 @@ body.home.index {
       text-overflow: ellipsis;
     }
 
-    .rails, .revision, .committed-at {
+    .rails, .revision {
+      width: 80px;
+    }
+
+    .committed-at {
       width: 135px;
     }
   }
