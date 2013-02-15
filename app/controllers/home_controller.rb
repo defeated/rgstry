@@ -29,23 +29,26 @@ class HomeController < ApplicationController
 
       # fetch gemfile.lock if it exists
       begin
-        gemfile     = github.contents repo.full_name, path: 'Gemfile.lock'
-        gemfile_raw = Base64.decode64 gemfile.content
-        parsed      = Bundler::LockfileParser.new gemfile_raw
+        gemfile = github.contents repo.full_name, path: 'Gemfile.lock'
+      rescue Octokit::NotFound
+        next
+      end
 
-        # check if rails is used
-        if rails = parsed.dependencies.find { |dep| dep.name == 'rails' }
-          program = Program.new({
-            name:         repo.full_name,
-            description:  repo.description,
-            rails:        rails.requirement.requirements.first.last.version,
-            revision:     master.commit.sha,
-            committed_at: master.commit.commit.committer.date
-          })
+      # parse gemfile.lock
+      gemfile_raw = Base64.decode64 gemfile.content
+      parsed      = Bundler::LockfileParser.new gemfile_raw
 
-          @programs << program
-        end
-      rescue
+      # check if rails is used
+      if rails = parsed.dependencies.find { |dep| dep.name == 'rails' }
+        program = Program.new({
+          name:         repo.full_name,
+          description:  repo.description,
+          rails:        rails.requirement.requirements.first.last.version,
+          revision:     master.commit.sha,
+          committed_at: master.commit.commit.committer.date
+        })
+
+        @programs << program
       end
     end
 
