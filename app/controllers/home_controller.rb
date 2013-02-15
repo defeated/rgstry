@@ -18,8 +18,15 @@ class HomeController < ApplicationController
       oauth_token:  ENV['GITHUB_OAUTH_TOKEN']
     })
 
-    # get all our repositories that identify as ruby
-    ruby_repos = github.org_repos( ENV['GITHUB_ORG'] ).select do |repo|
+    # repos by org or by user
+    available_repos = if org = ENV['GITHUB_ORG']
+      github.org_repos org
+    elsif user = ENV['GITHUB_USER']
+      github.list_repos user
+    end
+
+    # get all repositories that identify as ruby
+    ruby_repos = available_repos.select do |repo|
       repo.language == "Ruby"
     end
 
