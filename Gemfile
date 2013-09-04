@@ -1,7 +1,7 @@
 ruby '1.9.3'
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.14'
 gem 'sqlite3'
 gem 'octokit',  require: false
 gem 'gems',     require: false
